@@ -91,6 +91,7 @@ async function submitBattle(f1, f2) {
 
     const data = await res.json();
     renderResult(f1, f2, data.verdict);
+    setLoading(false);
   } catch (err) {
     show(errorMsg);
     errorMsg.textContent = 'Something went wrong. Please try again.';
