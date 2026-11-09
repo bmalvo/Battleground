@@ -1,3 +1,6 @@
 {
-  "version": 2
+  "version": 2,
+  "routes": [
+    { "src": "/api/battle", "dest": "/api/battle.js", "methods": ["POST", "OPTIONS"] }
+  ]
 }
