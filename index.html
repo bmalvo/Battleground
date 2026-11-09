@@ -8,16 +8,19 @@
 </head>
 <body>
   <div class="container">
-    <h1>Battlegroud</h1>
-    <p class="subtitle">Type two fighters. Get an AI verdict + character art.</p>
+    <div class="header">
+      <h1>Battlegroud</h1>
+      <button type="button" id="lang-toggle" class="lang-toggle">PL</button>
+    </div>
+    <p id="subtitle" class="subtitle">Type two fighters. Get an AI verdict + character art.</p>
 
     <form id="battle-form">
       <div class="input-group">
-        <label for="fighter1">Fighter 1</label>
+        <label id="label-fighter1" for="fighter1">Fighter 1</label>
         <input type="text" id="fighter1" name="fighter1" placeholder="e.g. Batman" required autocomplete="off">
       </div>
       <div class="input-group">
-        <label for="fighter2">Fighter 2</label>
+        <label id="label-fighter2" for="fighter2">Fighter 2</label>
         <input type="text" id="fighter2" name="fighter2" placeholder="e.g. Superman" required autocomplete="off">
       </div>
       <button type="submit" id="fight-btn">FIGHT!</button>
@@ -28,7 +31,7 @@
 
     <div id="loader" class="hidden">
       <div class="spinner"></div>
-      <p>Computing the epic battle...</p>
+      <p id="loader-text">Computing the epic battle...</p>
     </div>
 
     <div id="battle-result" class="hidden">
@@ -42,7 +45,7 @@
       </div>
 
       <div class="verdict-box">
-        <h2>The Verdict</h2>
+        <h2 id="verdict-heading">The Verdict</h2>
         <p id="verdict-text"></p>
       </div>
 
@@ -53,7 +56,7 @@
     </div>
 
     <section class="battledex" id="battledex">
-      <h2>BattleDex</h2>
+      <h2 id="battledex-heading">BattleDex</h2>
       <div id="battledex-list"></div>
       <button type="button" id="clear-dex" class="secondary">Clear BattleDex</button>
     </section>

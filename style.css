@@ -83,6 +83,21 @@ button {
   cursor: pointer;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.lang-toggle {
+  background: #334155;
+  color: #f8fafc;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;

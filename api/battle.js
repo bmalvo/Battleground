@@ -84,6 +84,7 @@ export default async function handler(req, res) {
 
   const fighter1 = String(body.fighter1 || '').trim();
   const fighter2 = String(body.fighter2 || '').trim();
+  const lang = String(body.lang || 'en');
   if (!fighter1 || !fighter2) {
     return sendJson(res, 400, { error: 'Both fighters are required' });
   }
@@ -97,7 +98,10 @@ export default async function handler(req, res) {
   recordRequest(ip);
 
   // ---- Call Gemini ----
-  const prompt = `Who would win in a fight between ${fighter1} and ${fighter2}? Write a short, fun, dramatic verdict in 2-3 short paragraphs. Declare a clear winner. Keep it under 200 words.`;
+  const isPolish = lang === 'pl';
+  const prompt = isPolish
+    ? `Kto wygrałby w walce między ${fighter1} a ${fighter2}? Napisz krótki, zabawny, dramatyczny werdykt w 2-3 krótkich akapitach. Oświadcz wyraźnego zwycięzcę. Zachowaj poniżej 200 słów. Odpowiedz po polsku.`
+    : `Who would win in a fight between ${fighter1} and ${fighter2}? Write a short, fun, dramatic verdict in 2-3 short paragraphs. Declare a clear winner. Keep it under 200 words.`;
 
   try {
     const geminiRes = await fetch(
