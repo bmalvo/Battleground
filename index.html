@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battlegroud - Who Would Win?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Battlegroud</h1>
+    <p class="subtitle">Type two fighters. Get an AI verdict + character art.</p>
+
+    <form id="battle-form">
+      <div class="input-group">
+        <label for="fighter1">Fighter 1</label>
+        <input type="text" id="fighter1" name="fighter1" placeholder="e.g. Batman" required autocomplete="off">
+      </div>
+      <div class="input-group">
+        <label for="fighter2">Fighter 2</label>
+        <input type="text" id="fighter2" name="fighter2" placeholder="e.g. Superman" required autocomplete="off">
+      </div>
+      <button type="submit" id="fight-btn">FIGHT!</button>
+    </form>
+
+    <div id="rate-limit" class="hidden error-msg"></div>
+    <div id="error" class="hidden error-msg">Something went wrong. Try again.</div>
+
+    <div id="loader" class="hidden">
+      <div class="spinner"></div>
+      <p>Computing the epic battle...</p>
+    </div>
+
+    <div id="battle-result" class="hidden">
+      <div class="fighters">
+        <div class="fighter-card">
+          <h3 id="name1"></h3>
+          <img id="art1" src="" alt="Fighter 1 art" loading="lazy">
+        </div>
+        <div class="versus">VS</div>
+        <div class="fighter-card">
+          <h3 id="name2"></h3>
+          <img id="art2" src="" alt="Fighter 2 art" loading="lazy">
+        </div>
+      </div>
+
+      <div class="verdict-box">
+        <h2>The Verdict</h2>
+        <p id="verdict-text"></p>
+      </div>
+
+      <div class="grid-actions">
+        <button type="button" id="save-btn">Save to BattleDex</button>
+        <button type="button" id="rematch-btn" class="secondary">Rematch</button>
+      </div>
+    </div>
+
+    <section class="battledex" id="battledex">
+      <h2>BattleDex</h2>
+      <div id="battledex-list"></div>
+      <button type="button" id="clear-dex" class="secondary">Clear BattleDex</button>
+    </section>
+  </div>
+  <script src="app.js" defer></script>
+</body>
+</html>

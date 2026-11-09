@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/battle.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
