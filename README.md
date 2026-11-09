@@ -2,7 +2,7 @@
 
 Free, no-backend "who would win" web app.
 
-- **Verdict:** Google Gemini 2.5 Flash (free tier)
+- **Verdict:** Google Gemini 3.8 Flash (free tier)
 - **Character art:** Pollinations.ai (no API key required)
 - **Storage:** localStorage (BattleDex)
 - **Hosting:** Vercel serverless function
