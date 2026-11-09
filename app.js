@@ -26,8 +26,8 @@ let cooldownTimer = null;
 function hide(el) { el.classList.add('hidden'); }
 function show(el) { el.classList.remove('hidden'); }
 
-function pollinationsUrl(name) {
-  const prompt = `${name}, character portrait art, digital illustration, vibrant colors, epic style, white background`;
+function pollinationsUrl(f1, f2) {
+  const prompt = `${f1} vs ${f2}, character portrait art, digital illustration, vibrant colors, epic style, white background, versus composition`;
   return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=512&height=512&nologo=true`;
 }
 
@@ -103,8 +103,8 @@ async function submitBattle(f1, f2) {
 function renderResult(f1, f2, verdict) {
   name1El.textContent = f1;
   name2El.textContent = f2;
-  art1El.src = pollinationsUrl(f1);
-  art2El.src = pollinationsUrl(f2);
+  const artEl = document.getElementById('battle-art');
+  artEl.src = pollinationsUrl(f1, f2);
   verdictEl.textContent = verdict;
 
   hide(errorMsg);
@@ -112,26 +112,19 @@ function renderResult(f1, f2, verdict) {
   show(result);
 
   // Handle Pollinations rate limits (1 image per 45s on free tier)
-  art1El.onerror = () => handleImageError(art1El, f1);
-  art2El.onerror = () => handleImageError(art2El, f2);
+  artEl.onerror = () => handleImageError(artEl, f1, f2);
 }
 
-function handleImageError(imgEl, name) {
+function handleImageError(imgEl, f1, f2) {
   imgEl.style.display = 'none';
-
-  const card = imgEl.closest('.fighter-card');
-  if (!card) return;
-
-  // Remove existing retry button if any
-  const existing = card.querySelector('.retry-img');
-  if (existing) existing.remove();
 
   const retryBtn = document.createElement('button');
   retryBtn.className = 'retry-img';
   retryBtn.textContent = 'Retry image';
-  retryBtn.style.marginTop = '8px';
-  retryBtn.style.padding = '6px 12px';
-  retryBtn.style.fontSize = '0.85rem';
+  retryBtn.style.display = 'block';
+  retryBtn.style.margin = '12px auto 0';
+  retryBtn.style.padding = '8px 16px';
+  retryBtn.style.fontSize = '0.9rem';
   retryBtn.style.background = '#334155';
   retryBtn.style.color = '#f8fafc';
   retryBtn.style.border = 'none';
@@ -147,13 +140,13 @@ function handleImageError(imgEl, name) {
 
     setTimeout(() => {
       imgEl.style.display = '';
-      imgEl.src = pollinationsUrl(name);
+      imgEl.src = pollinationsUrl(f1, f2);
       retryBtn.remove();
       waiting = false;
     }, 45000);
   });
 
-  card.appendChild(retryBtn);
+  imgEl.parentNode.appendChild(retryBtn);
 }
 function saveBattle(f1, f2, verdict) {
   const entry = {
