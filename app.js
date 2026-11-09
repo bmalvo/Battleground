@@ -109,6 +109,50 @@ function renderResult(f1, f2, verdict) {
   hide(errorMsg);
   hide(rateLimitMsg);
   show(result);
+
+  // Handle Pollinations rate limits (1 image per 45s on free tier)
+  art1El.onerror = () => handleImageError(art1El, f1);
+  art2El.onerror = () => handleImageError(art2El, f2);
+}
+
+function handleImageError(imgEl, name) {
+  imgEl.style.display = 'none';
+
+  const card = imgEl.closest('.fighter-card');
+  if (!card) return;
+
+  // Remove existing retry button if any
+  const existing = card.querySelector('.retry-img');
+  if (existing) existing.remove();
+
+  const retryBtn = document.createElement('button');
+  retryBtn.className = 'retry-img';
+  retryBtn.textContent = 'Retry image';
+  retryBtn.style.marginTop = '8px';
+  retryBtn.style.padding = '6px 12px';
+  retryBtn.style.fontSize = '0.85rem';
+  retryBtn.style.background = '#334155';
+  retryBtn.style.color = '#f8fafc';
+  retryBtn.style.border = 'none';
+  retryBtn.style.borderRadius = '6px';
+  retryBtn.style.cursor = 'pointer';
+
+  let waiting = false;
+  retryBtn.addEventListener('click', () => {
+    if (waiting) return;
+    waiting = true;
+    retryBtn.textContent = 'Retrying in 45s...';
+    retryBtn.disabled = true;
+
+    setTimeout(() => {
+      imgEl.style.display = '';
+      imgEl.src = pollinationsUrl(name);
+      retryBtn.remove();
+      waiting = false;
+    }, 45000);
+  });
+
+  card.appendChild(retryBtn);
 }
 function saveBattle(f1, f2, verdict) {
   const entry = {
