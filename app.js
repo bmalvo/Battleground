@@ -27,7 +27,7 @@ function hide(el) { el.classList.add('hidden'); }
 function show(el) { el.classList.remove('hidden'); }
 
 function pollinationsUrl(f1, f2) {
-  const prompt = `${f1} vs ${f2}, character portrait art, digital illustration, vibrant colors, epic style, white background, versus composition`;
+  const prompt = `${f1} on the left side, ${f2} on the right side, facing each other, character portrait art, digital illustration, vibrant colors, epic style, white background, versus composition, split screen`;
   return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=512&height=512&nologo=true`;
 }
 
