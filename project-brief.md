@@ -16,7 +16,7 @@ A web app where you type in two fighters and get an AI-generated verdict on who 
 
 - **Frontend:** HTML, CSS, Vanilla JS
 - **Hosting:** Vercel (serverless function)
-- **Verdict AI:** Google Gemini 1.5 Flash (free tier via Google AI Studio) — proxied through `/api/battle` so the API key never reaches the browser
+- **Verdict AI:** Google Gemini 2.5 Flash (free tier via Google AI Studio) — proxied through `/api/battle` so the API key never reaches the browser
 - **Character art:** Pollinations.ai (free, no API key required — generates images via URL)
 - **BattleDex:** localStorage (saved in the browser)
 - **Rate limiting:** 5 battles per minute per IP, enforced in the Vercel serverless function (in-memory). Returns HTTP 429 with `Retry-After` header when exceeded.
